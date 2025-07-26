@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>星座與行車建議</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet, red);
+      background-size: 1000000% 1000000%;
+      animation: rgbFlow 15s linear infinite;
+    }
+    h1 {
+      color: #ff69b4;
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+    input {
+      padding: 5px;
+      margin-top: 5px;
+    }
+    .bt {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+    .bt:hover {
+      transform: scale(1.5);
+      text-decoration-line: underline;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fff0f5;
+      border-radius: 10px;
+    }
+    @keyframes rgbFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body>  
+  <h1>🌟 星座判斷與行車建議</h1>
+
+  <form id="zodiacForm">
+    <label>名字：
+      <input type="text" id="name" required placeholder="請輸入名字" />
+    </label>
+
+    <label>年齡：
+      <input type="number" id="age" required placeholder="請輸入年齡" />
+    </label>
+
+    <label>生日月份（1～12）：
+      <input type="number" id="month" min="1" max="12" required placeholder="請輸入月份"/>
+    </label>
+
+    <label>生日日期（1～31）：
+      <input type="number" id="day" min="1" max="31" required placeholder="請輸入日期" />
+    </label>
+
+    <button type="submit" class="bt">送出</button>
+  </form>
+
+  <div class="result" id="resultBox" style="display:none;">
+    <h2 id="greeting"></h2>
+    <p id="safetyAdvice"></p>
+    <p id="zodiacResult"></p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("zodiacForm");
+      const resultBox = document.getElementById("resultBox");
+      const greeting = document.getElementById("greeting");
+      const safetyAdvice = document.getElementById("safetyAdvice");
+      const zodiacResult = document.getElementById("zodiacResult");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+        const month = document.getElementById("month").value;
+        const day = document.getElementById("day").value;
+
+        const res = await fetch("/get_zodiac", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ name, age, month, day })
+        });
+
+        const data = await res.json();
+
+        greeting.innerText = `你好呀 ${data.name}！`;
+        safetyAdvice.innerText = `🚗 行車建議：${data.suggestion}`;
+        zodiacResult.innerText = `🔮 你的星座是：${data.zodiac}（${data.birthday}）`;
+
+        resultBox.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>

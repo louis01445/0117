@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>頭部跟著滑鼠</title>
+  <style>
+    body {
+      background: linear-gradient(270deg, red, green, blue);
+      background-size: 800% 800%;
+      animation: rgb 5s linear infinite;
+    }
+
+    .head {
+      margin: auto;
+      
+      width: 150px;
+      height: 150px;
+      background: url('https://louis01445.github.io/today1/JOJO%E7%9A%84%E5%A5%87%E5%A6%99%E5%86%92%E9%99%A9-%E9%BB%84%E9%87%91%E4%B9%8B%E9%A3%8E-%E5%8D%95%E8%A7%92%E8%89%B2%E5%AE%98%E5%AE%A3%E6%B5%B7%E6%8A%A51.jpg') no-repeat center;
+      background-size: 100px;
+      transition: transform 0.1s linear;
+    }
+    
+    @keyframes rgb {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 50% 100%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="head" id="head"></div>
+
+  <script>
+    const head = document.getElementById('head');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX - window.innerWidth / 2;
+      const y = e.clientY - window.innerHeight / 2;
+      const angle = Math.atan2(y, x) * (180 / Math.PI);
+      head.style.transform = `rotate(${angle}deg)`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>暗色模式與亮色模式切換</title>
+  <style>
+    /* ========== 主體樣式 ========== */
+
+    /* 亮色主題：白底黑字 */
+    body.light {
+      background-color: white;
+      color: black;
+      transition: background-color 0.3s, color 0.3s;
+       /* 淡入淡出過渡效果 */
+    }
+
+    /* 暗色主題：黑底白字 */
+    body.dark {
+      background-color: #121212;
+      color: white;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* ========== 滑動開關的樣式 ========== */
+
+    /* 外層容器，定義開關大小 */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      margin: 20px;
+    }
+
+    /* 真正的 checkbox 隱藏起來 */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* 開關的底部橢圓形滑塊背景 */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 34px; /* 圓角 */
+      
+    }
+
+    /* 滑塊內的圓形按鈕 */
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: all 0.4s ease;
+      border-radius: 50%;
+    }
+
+    /* 勾選後滑塊背景顏色變藍 */
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    /* 勾選後圓形滑塊往右移動 */
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    /* 開關右邊的文字（顯示目前模式） */
+    #mode-label {
+      font-size: 18px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <!-- 開關區塊 -->
+  <label class="switch">
+    <!-- 隱藏的 checkbox -->
+    <input type="checkbox" id="toggle-theme">
+    <!-- 開關外觀 -->
+    <span class="slider"></span>
+  </label>
+
+  <!-- 開關右側文字：顯示亮色模式或暗色模式 -->
+  <span id="mode-label">亮色模式</span>
+
+  <!-- 內容區塊 -->
+  <h1>歡迎來到我的網頁！</h1>
+  <p>這是支援亮/暗色模式的範例。</p>
+
+  <script>
+    // 偵測使用者系統是否偏好暗色模式（例如手機是深色主題）
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // 從 localStorage 取得先前儲存的主題（若有）
+    const savedTheme = localStorage.getItem('theme');
+
+    // 取得滑動開關 checkbox 和右側文字 label 的 DOM 元素
+    const checkbox = document.getElementById('toggle-theme');
+    const label = document.getElementById('mode-label');
+
+    // 初次進入網頁：根據 localStorage 或系統偏好設定主題
+    if (savedTheme) {
+      // 如果有儲存過主題，就套用該主題
+      document.body.classList.add(savedTheme);
+      checkbox.checked = savedTheme === 'dark'; // 若主題是暗色則開啟開關
+    } else {
+      // 沒有儲存過，就依照系統偏好設定
+      const defaultTheme = prefersDark ? 'dark' : 'light';
+      document.body.classList.add(defaultTheme);
+      checkbox.checked = prefersDark;
+    }
+
+    // 初始化時，更新文字顯示目前模式
+    label.textContent = checkbox.checked ? '暗色模式' : '亮色模式';
+
+    // 當開關變動時執行：切換主題
+    checkbox.addEventListener('change', () => {
+      const isDark = checkbox.checked; // 若打開開關，表示使用暗色主題
+
+      // 根據狀態加上/移除對應 class
+      document.body.classList.toggle('dark', isDark);
+      document.body.classList.toggle('light', !isDark);
+
+      // 儲存目前主題到 localStorage
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+      // 更新文字顯示
+      label.textContent = isDark ? '暗色模式' : '亮色模式';
+    });
+  </script>
+</body>
+</html>

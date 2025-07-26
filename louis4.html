@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>暖心咖啡廳</title>
+  <style>
+    /* 主色調 */
+    :root {
+      --coffee-brown: #6f4e37;
+      --light-green: #a8d5ba;
+      --background: #fff8f0;
+      --text-color: #3b2f2f;
+    }
+
+    /* Reset & 基本樣式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background-color: var(--background);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: var(--coffee-brown);
+      margin-bottom: 12px;
+    }
+    a {
+      color: var(--coffee-brown);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 容器 */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(111, 78, 55, 0.2);
+    }
+
+    /* 導覽列 */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background-color: var(--light-green);
+      color: var(--coffee-brown);
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: var(--coffee-brown);
+      color: #fff;
+    }
+
+    /* 版面區塊 */
+    section {
+      margin-bottom: 40px;
+    }
+
+    /* 菜單列表 */
+    .menu-list {
+      list-style: none;
+    }
+    .menu-item {
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--light-green);
+      padding-bottom: 12px;
+    }
+    .menu-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+    .menu-item .desc {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    .menu-item .price {
+      font-weight: 700;
+      color: var(--coffee-brown);
+    }
+
+    /* 營業時間表 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid var(--light-green);
+      text-align: center;
+      color: var(--coffee-brown);
+    }
+    th {
+      background-color: var(--light-green);
+    }
+
+    /* 聯絡表單 */
+    form {
+      max-width: 500px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 18px;
+      border: 1px solid var(--light-green);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      background-color: var(--coffee-brown);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #55331c;
+    }
+
+    /* 響應式 */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .container {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>暖心咖啡廳</h1>
+      <nav>
+        <a href="#adout">關於我們</a>
+        <a href="#menu">菜單</a>
+        <a href="#location">店家位置</a>
+        <a href="#hours">營業時間</a>
+        <a href="#contact">聯絡我們</a>
+      </nav>
+    </header>
+
+    <section id="adout">
+      <h2>關於我們</h2>
+      <p>歡迎來到暖心咖啡廳，這裡充滿溫暖的手作氛圍與自然風格，讓每一杯咖啡都帶著家的味道。</p>
+    </section>
+
+    <section id="menu">
+      <h2>菜單</h2>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <h3>手沖咖啡</h3>
+          <p class="desc">精選單品咖啡豆，細膩的風味層次。</p>
+          <p class="price">NT$150</p>
+        </li>
+        <li class="menu-item">
+          <h3>拿鐵咖啡</h3>
+          <p class="desc">濃郁的咖啡搭配綿密奶泡。</p>
+          <p class="price">NT$130</p>
+        </li>
+        <li class="menu-item">
+          <h3>抹茶拿鐵</h3>
+          <p class="desc">日式抹茶與牛奶完美融合。</p>
+          <p class="price">NT$140</p>
+        </li>
+        <li class="menu-item">
+          <h3>招牌鬆餅</h3>
+          <p class="desc">酥脆外皮，內裡鬆軟，搭配新鮮水果。</p>
+          <p class="price">NT$180</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="location">
+      <h2>店家位置</h2>
+      <!-- Google Map 嵌入 -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.484973061814!2d120.21635831500016!3d22.99898728500865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04d6df6075c9%3A0xe79f8a68b20d352a!2z5Lit5aSu6YeN6Zmk!5e0!3m2!1szh-TW!2stw!4v1689783012841!5m2!1szh-TW!2stw"
+        width="100%"
+        height="350"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <section id="hours">
+      <h2>營業時間</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>星期</th>
+            <th>營業時間</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>星期一</td><td>08:00 - 18:00</td></tr>
+          <tr><td>星期二</td><td>08:00 - 18:00</td></tr>
+          <tr><td>星期三</td><td>08:00 - 18:00</td></tr>
+          <tr><td>星期四</td><td>08:00 - 18:00</td></tr>
+          <tr><td>星期五</td><td>08:00 - 20:00</td></tr>
+          <tr><td>星期六</td><td>09:00 - 20:00</td></tr>
+          <tr><td>星期日</td><td>09:00 - 18:00</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="contact">
+      <h2>聯絡我們</h2>
+      <form action="https://formspree.io/f/mqkwgqnk" method="POST">
+        <label for="name">姓名</label>
+        <input type="text" id="name" name="name" placeholder="你的名字" required />
+
+        <label for="email">電子郵件</label>
+        <input type="email" id="email" name="_replyto" placeholder="your@email.com" required />
+
+        <label for="message">留言內容</label>
+        <textarea id="message" name="message" placeholder="寫下你的訊息…" required></textarea>
+
+        <button type="submit">送出</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
