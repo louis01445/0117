@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern Waifu Viewer</title>
+  <link rel="stylesheet" href="louis6.css"/>
+</head>
+<body>
+  <div class="nar">
+    <ul>
+      <li class="list active">
+        <a href="#">
+        <span class="icon">
+          <ion-icon name="logo-youtube">
+          </ion-icon>
+          </span>
+          <span class="text">Youtube</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="#">
+        <span class="icon">
+          <ion-icon name="logo-facebook">
+          </ion-icon>
+          </span>
+          <span class="text">Facebook</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="#">
+        <span class="icon">
+          <ion-icon name="logo-telegram">
+          </ion-icon>
+          </span>
+          <span class="text">Telegram</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="#">
+        <span class="icon">
+          <ion-icon name="chatbubble-ellipses">
+          </ion-icon>
+          </span>
+          <span class="text">Message</span>
+        </a>
+      </li>
+      <li class="list">
+        <a href="#">
+        <span class="icon">
+          <ion-icon name="logo-instagram"></ion-icon>
+          </span>
+          <span class="text">Instagram</span>
+        </a>
+      </li>
+      <div class="indicator"></div>
+    </ul>
+    </div>
+  </div>
+  <h1 id="a"><a id="b" href="#1">點擊底下按鈕</a></h1>
+  <div id="box">
+    <img src="" id="img" class="image" alt="隨機圖片">
+    <br>
+    <button class="bt" id="1" onclick="loadimage()">點擊</button>
+  </div>
+  <script>
+  const list=document.querySelectorAll('.list');
+  
+  function atliveload(){
+    list.forEach((item)=>item.classList.remove('active'));
+    this.classList.add('active');
+  }
+  list.forEach((item)=>item.addEventListener('click',atliveload));
+  </script>
+  <script>
+    function loadimage() {
+      fetch("https://api.waifu.pics/sfw/waifu")
+        .then(res => res.json())
+        .then(data => {
+          const img = document.getElementById("img");
+          img.classList.remove('show');
+          void img.offsetWidth;
+          img.src = data.url;
+          img.classList.add('show');
+        });
+    }
+    loadimage();
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script module src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
